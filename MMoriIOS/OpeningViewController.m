@@ -7,13 +7,15 @@
 //
 
 #import "OpeningViewController.h"
+#import "CountryPicker.h"
 
-@interface OpeningViewController () <UITextFieldDelegate, UIPickerViewDelegate>
+@interface OpeningViewController () <UITextFieldDelegate, CountryPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *birthdayField;
 @property (weak, nonatomic) IBOutlet UITextField *yearsAliveField;
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSString *yearsAlive;
+@property (weak, nonatomic) IBOutlet UITextField *countryField;
 
 @end
 
@@ -24,7 +26,14 @@
     
     self.birthdayField.delegate = self;
     self.yearsAliveField.delegate = self;
+    self.countryField.delegate = self;
 }
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+
+}
+
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -35,14 +44,14 @@
     doneBar.items = barItems;
     
     if ([self.yearsAliveField isFirstResponder]) {
-        
+        NSLog(@"yearsAliveField");
         textField.inputAccessoryView = doneBar;
         [textField setKeyboardType:UIKeyboardTypeNumberPad];
         
     }
     
     if ([self.birthdayField isFirstResponder]) {
-        
+        NSLog(@"birthdayField");
         UIDatePicker *datePicker = [[UIDatePicker alloc] init];
         [datePicker setDatePickerMode:UIDatePickerModeDate];
         
@@ -52,6 +61,22 @@
         [datePicker addTarget:self action:@selector(datePickerChanged:) forControlEvents:UIControlEventValueChanged];
     }
     
+    if ([self.countryField isFirstResponder]) {
+        
+        NSLog(@"countryPicker");
+        CountryPicker *countryPicker = [[CountryPicker alloc] init];
+        countryPicker.delegate = self;
+        
+        textField.inputView = countryPicker;
+        textField.inputAccessoryView = doneBar;
+    }
+    
+}
+
+- (void)countryPicker:(CountryPicker *)picker didSelectCountryWithName:(NSString *)name code:(NSString *)code
+{
+    NSLog(@"country %@", name);
+    NSLog(@"code %@", code);
 }
 
 - (void)datePickerChanged:(UIDatePicker *)datePicker
@@ -74,6 +99,11 @@
         self.birthdayField.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self.date]];
         [self.birthdayField endEditing:YES];
     }
+    
+    if ([self.countryField isFirstResponder]) {
+        
+        [self.countryField endEditing:YES];
+    }
 }
 
 #pragma mark - Navigation
@@ -81,7 +111,6 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    UIViewController *resultsViewController = [segue destinationViewController];
     
 }
 
