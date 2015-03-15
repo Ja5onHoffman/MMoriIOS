@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSDate *date;
 @property (strong, nonatomic) NSString *yearsAlive;
 @property (weak, nonatomic) IBOutlet UITextField *countryField;
+@property (strong, nonatomic) CountryPicker *countryPicker;
 
 @end
 
@@ -27,6 +28,10 @@
     self.birthdayField.delegate = self;
     self.yearsAliveField.delegate = self;
     self.countryField.delegate = self;
+    
+    self.countryPicker = [[CountryPicker alloc] init];
+    self.countryPicker.delegate = self;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,20 +68,36 @@
     
     if ([self.countryField isFirstResponder]) {
         
-        NSLog(@"countryPicker");
-        CountryPicker *countryPicker = [[CountryPicker alloc] init];
-        countryPicker.delegate = self;
+        UIBarButtonItem *usButton = [[UIBarButtonItem alloc] initWithTitle:@"U.S.A." style:UIBarButtonItemStylePlain target:self action:@selector(selectUS)];
+        UIBarButtonItem *ukButton = [[UIBarButtonItem alloc] initWithTitle:@"U.K." style:UIBarButtonItemStylePlain target:self action:@selector(selectUK)];
         
-        textField.inputView = countryPicker;
+        barItems = @[usButton, space, ukButton, space, doneButton];
+        doneBar.items = barItems;
+        
+        textField.inputView = self.countryPicker;
         textField.inputAccessoryView = doneBar;
     }
     
 }
 
+- (void)selectUS
+{
+    [self.countryPicker selectRow:237 inComponent:0 animated:YES];
+    [self countryPicker:self.countryPicker didSelectCountryWithName:@"United States" code:@"US"];
+}
+
+- (void)selectUK
+{
+    [self.countryPicker selectRow:236 inComponent:0 animated:YES];
+    [self countryPicker:self.countryPicker didSelectCountryWithName:@"United Kingdom" code:@"GB"];
+}
+
+
 - (void)countryPicker:(CountryPicker *)picker didSelectCountryWithName:(NSString *)name code:(NSString *)code
 {
-    NSLog(@"country %@", name);
     NSLog(@"code %@", code);
+    NSLog(@"name %@", name);
+    self.countryField.text = name;
 }
 
 - (void)datePickerChanged:(UIDatePicker *)datePicker
