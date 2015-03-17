@@ -10,4 +10,9 @@
 
 @interface ResultsViewController : UIViewController
 
+@property (strong, nonatomic) NSDate *birthday;
+@property (strong, nonatomic) NSString *country;
+@property (nonatomic) NSInteger yearsAlive;
+@property (strong, nonatomic) NSString *sex;
+
 @end

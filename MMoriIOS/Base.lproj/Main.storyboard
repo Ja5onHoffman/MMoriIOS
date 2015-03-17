@@ -55,6 +55,7 @@
                     <connections>
                         <outlet property="birthdayField" destination="aD9-AR-PHl" id="pkf-Rk-FKM"/>
                         <outlet property="countryField" destination="ilJ-1D-2Ks" id="Mch-vp-eKN"/>
+                        <outlet property="sexSlider" destination="7Eb-rd-iSD" id="Oks-ck-sj3"/>
                         <outlet property="yearsAliveField" destination="OrY-BB-U85" id="fPG-7V-BmM"/>
                     </connections>
                 </viewController>
@@ -62,10 +63,10 @@
             </objects>
             <point key="canvasLocation" x="1412" y="418"/>
         </scene>
-        <!--View Controller-->
+        <!--Results View Controller-->
         <scene sceneID="udG-Qh-hb3">
             <objects>
-                <viewController id="1QY-Ve-IId" sceneMemberID="viewController">
+                <viewController id="1QY-Ve-IId" customClass="ResultsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CyZ-ku-Qhl"/>
                         <viewControllerLayoutGuide type="bottom" id="Vh4-zX-HUV"/>

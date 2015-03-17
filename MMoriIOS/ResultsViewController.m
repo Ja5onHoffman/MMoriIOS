@@ -8,7 +8,9 @@
 
 #import "ResultsViewController.h"
 
-@interface ResultsViewController ()
+@interface ResultsViewController () <NSURLSessionDelegate>
+
+@property (strong, nonatomic) NSURLSession *urlSession;
 
 @end
 
@@ -16,12 +18,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    //Calculate age based on current date
+    NSDate *today = [NSDate date];
+    
+    NSDateComponents* ageComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:self.birthday toDate:today options:0];
+    NSInteger age = [ageComponents year];
+    
+    
+    NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    self.urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)callWorldPopApi
+{
+    
 }
 
 /*

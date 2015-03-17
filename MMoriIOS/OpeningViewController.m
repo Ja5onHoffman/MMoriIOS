@@ -7,16 +7,19 @@
 //
 
 #import "OpeningViewController.h"
+#import "ResultsViewController.h"
 #import "CountryPicker.h"
 
 @interface OpeningViewController () <UITextFieldDelegate, CountryPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *birthdayField;
 @property (weak, nonatomic) IBOutlet UITextField *yearsAliveField;
-@property (strong, nonatomic) NSDate *date;
-@property (strong, nonatomic) NSString *yearsAlive;
+@property (strong, nonatomic) NSDate *birthday;
+@property (nonatomic) NSInteger yearsAlive;
+@property (strong, nonatomic) NSString *sex;
 @property (weak, nonatomic) IBOutlet UITextField *countryField;
 @property (strong, nonatomic) CountryPicker *countryPicker;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sexSlider;
 
 @end
 
@@ -103,7 +106,7 @@
 - (void)datePickerChanged:(UIDatePicker *)datePicker
 {
     NSLog(@"%@", datePicker.date);
-    self.date = datePicker.date;
+    self.birthday = datePicker.date;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -117,7 +120,7 @@
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"MM/dd/yyyy"];
         
-        self.birthdayField.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self.date]];
+        self.birthdayField.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self.birthday]];
         [self.birthdayField endEditing:YES];
     }
     
@@ -129,10 +132,16 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    ResultsViewController *rvc = segue.destinationViewController;
+    rvc.birthday = self.birthday;
     
+    if (self.sexSlider.selectedSegmentIndex == 0) {
+        rvc.sex = @"female";
+    } else {
+        rvc.sex = @"male";
+    }
 }
 
 
