@@ -105,7 +105,6 @@
 
 - (void)datePickerChanged:(UIDatePicker *)datePicker
 {
-    NSLog(@"%@", datePicker.date);
     self.birthday = datePicker.date;
 }
 
@@ -117,10 +116,12 @@
     }
     
     if ([self.birthdayField isFirstResponder]) {
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM/dd/yyyy"];
         
-        self.birthdayField.text = [NSString stringWithFormat:@"%@", [dateFormatter stringFromDate:self.birthday]];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MM/dd/yyy"];
+        NSString *date = [formatter stringFromDate:self.birthday];
+        
+        self.birthdayField.text = date;
         [self.birthdayField endEditing:YES];
     }
     
@@ -134,13 +135,16 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    ResultsViewController *rvc = segue.destinationViewController;
-    rvc.birthday = self.birthday;
-    
-    if (self.sexSlider.selectedSegmentIndex == 0) {
-        rvc.sex = @"female";
-    } else {
-        rvc.sex = @"male";
+    if ([segue.identifier  isEqual: @"GetResults"]) {
+        ResultsViewController *rvc = segue.destinationViewController;
+        rvc.birthday = self.birthday;
+        rvc.country = self.countryField.text;
+        
+        if (self.sexSlider.selectedSegmentIndex == 0) {
+            rvc.sex = @"female";
+        } else {
+            rvc.sex = @"male";
+        }
     }
 }
 
