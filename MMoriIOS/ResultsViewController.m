@@ -7,7 +7,7 @@
 //
 
 #import "ResultsViewController.h"
-#import "GridView.h"
+#import "GridVisualViewController.h"
 
 #define WORLD_POP_URL @"http://api.population.io:80/1.0/life-expectancy/remaining"
 
@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) NSURLSession *urlSession;
 @property (strong, nonatomic) NSString *age;
+@property (weak, nonatomic) IBOutlet UILabel *resultsLabel;
 
 @end
 
@@ -23,8 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIScrollView *scrollView = (UIScrollView *)self.view;
-    [scrollView setContentSize:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 1.5)];
+    self.navigationController.navigationBarHidden = NO;
     
     //Calculate age based on current date
     NSDate *today = [NSDate date];
@@ -61,7 +61,8 @@
             NSLog(@"There was an error");
         } else {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-            NSLog(@"dict %@", dict);
+            
+            [self printResultsWithDict:dict];
             }
         
     }];
@@ -69,14 +70,30 @@
     [dataTask resume];
 }
 
-/*
+- (void)printResultsWithDict:(NSDictionary *)dict
+{
+    NSString *age = [dict objectForKey:@"age"];
+    NSString *ageFormatted = [age substringToIndex:age.length -1];
+    NSString *country = [dict objectForKey:@"country"];
+    NSString *sex = [dict objectForKey:@"sex"];
+    NSString *remainingLife = [dict objectForKey:@"remaining_life_expectancy"];
+    
+    NSString *labelText = [NSString stringWithFormat:@"According to The World Population Project, as a %@ year old %@ living in %@, your are expected to live for an additional %@ years.\n\nSpend them wisely!\n\nThe visualization is based on your expected lifespan input.", ageFormatted, sex, country, remainingLife];
+    
+    [self.resultsLabel sizeToFit];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.resultsLabel.text = labelText;
+    });
+}
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    GridVisualViewController *gvc = segue.destinationViewController;
+    
 }
-*/
+
 
 @end

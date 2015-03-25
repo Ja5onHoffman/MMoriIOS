@@ -28,6 +28,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
     self.birthdayField.delegate = self;
     self.yearsAliveField.delegate = self;
     self.countryField.delegate = self;
@@ -35,6 +37,18 @@
     self.countryPicker = [[CountryPicker alloc] init];
     self.countryPicker.delegate = self;
     
+    self.navigationController.navigationBarHidden = YES;
+    
+    UIImage *backgroundImage = [UIImage imageNamed:@"mMori"];
+    UIImageView *backgroundImageView = [[UIImageView alloc] initWithFrame:self.view.frame];
+    backgroundImageView.image = backgroundImage;
+    backgroundImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.view insertSubview:backgroundImageView atIndex:0];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -133,18 +147,30 @@
 
 #pragma mark - Navigation
 
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
+{
+    if ([identifier  isEqualToString:@"GetResults"]) {
+        if (![self.birthdayField hasText] || ![self.countryField hasText] || ![self.yearsAliveField hasText]) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Missing info" message:@"Fill out every field to get your results" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            
+            [alertView show];
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier  isEqual: @"GetResults"]) {
-        ResultsViewController *rvc = segue.destinationViewController;
-        rvc.birthday = self.birthday;
-        rvc.country = self.countryField.text;
+    ResultsViewController *rvc = segue.destinationViewController;
+    rvc.birthday = self.birthday;
+    rvc.country = self.countryField.text;
         
-        if (self.sexSlider.selectedSegmentIndex == 0) {
-            rvc.sex = @"female";
-        } else {
-            rvc.sex = @"male";
-        }
+    if (self.sexSlider.selectedSegmentIndex == 0) {
+        rvc.sex = @"female";
+    } else {
+        rvc.sex = @"male";
     }
 }
 
