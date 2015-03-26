@@ -15,6 +15,8 @@
 
 @property (strong, nonatomic) NSURLSession *urlSession;
 @property (strong, nonatomic) NSString *age;
+@property (nonatomic) int ageInt;
+@property (nonatomic) int weeks;
 @property (weak, nonatomic) IBOutlet UILabel *resultsLabel;
 
 @end
@@ -29,10 +31,10 @@
     //Calculate age based on current date
     NSDate *today = [NSDate date];
     
-    NSDateComponents* ageComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:self.birthday toDate:today options:0];
+    NSDateComponents* ageComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitWeekOfYear | NSCalendarUnitDay) fromDate:self.birthday toDate:today options:0];
     NSInteger age = [ageComponents year];
+    self.weeks = (int)[ageComponents weekOfYear];
     self.age = [NSString stringWithFormat:@"%ld", age];
-    
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
     self.urlSession = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:nil];
     
@@ -74,6 +76,7 @@
 {
     NSString *age = [dict objectForKey:@"age"];
     NSString *ageFormatted = [age substringToIndex:age.length -1];
+    self.ageInt = [ageFormatted intValue];
     NSString *country = [dict objectForKey:@"country"];
     NSString *sex = [dict objectForKey:@"sex"];
     NSString *remainingLife = [dict objectForKey:@"remaining_life_expectancy"];
@@ -92,7 +95,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     GridVisualViewController *gvc = segue.destinationViewController;
-    
+    gvc.age = self.ageInt;
+    gvc.weeks = self.weeks;
+    gvc.lifespan = self.lifespan;
 }
 
 

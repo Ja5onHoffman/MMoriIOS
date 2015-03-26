@@ -56,8 +56,8 @@
                     <connections>
                         <outlet property="birthdayField" destination="aD9-AR-PHl" id="pkf-Rk-FKM"/>
                         <outlet property="countryField" destination="ilJ-1D-2Ks" id="Mch-vp-eKN"/>
+                        <outlet property="lifespanField" destination="OrY-BB-U85" id="8wz-py-bVK"/>
                         <outlet property="sexSlider" destination="7Eb-rd-iSD" id="Oks-ck-sj3"/>
-                        <outlet property="yearsAliveField" destination="OrY-BB-U85" id="fPG-7V-BmM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -116,20 +116,17 @@
             <objects>
                 <viewController id="1QY-Ve-IId" customClass="GridVisualViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zA3-Ki-g1h"/>
-                        <viewControllerLayoutGuide type="bottom" id="NZh-ox-MBJ"/>
+                        <viewControllerLayoutGuide type="top" id="zcO-KX-0e1"/>
+                        <viewControllerLayoutGuide type="bottom" id="h9m-9b-pas"/>
                     </layoutGuides>
-                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" id="MUl-JM-N3l">
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="uDN-6b-Pc0" customClass="GridView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="99l-oc-Jho" customClass="GridView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                        </subviews>
                     </scrollView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="gridView" destination="uDN-6b-Pc0" id="eKX-RN-lSh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGG-Pb-Nm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

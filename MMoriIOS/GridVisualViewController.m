@@ -11,13 +11,21 @@
 
 @interface GridVisualViewController ()
 
+@property (strong, nonatomic) IBOutlet GridView *gridView;
+
 @end
 
 @implementation GridVisualViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.gridView.age = self.age;
+    self.gridView.weeks = self.weeks;
+    self.gridView.lifespan = self.lifespan;
+    self.gridView.backgroundColor = [UIColor whiteColor];
+    
+    [self.gridView setNeedsDisplay];
 }
 
 - (void)didReceiveMemoryWarning {

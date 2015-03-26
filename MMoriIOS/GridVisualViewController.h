@@ -10,4 +10,8 @@
 
 @interface GridVisualViewController : UIViewController
 
+@property (nonatomic) float age;
+@property (nonatomic) int weeks;
+@property (nonatomic) int lifespan;
+
 @end

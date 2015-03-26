@@ -13,9 +13,9 @@
 @interface OpeningViewController () <UITextFieldDelegate, CountryPickerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *birthdayField;
-@property (weak, nonatomic) IBOutlet UITextField *yearsAliveField;
+@property (weak, nonatomic) IBOutlet UITextField *lifespanField;
 @property (strong, nonatomic) NSDate *birthday;
-@property (nonatomic) NSInteger yearsAlive;
+@property (nonatomic) int lifespan;
 @property (strong, nonatomic) NSString *sex;
 @property (weak, nonatomic) IBOutlet UITextField *countryField;
 @property (strong, nonatomic) CountryPicker *countryPicker;
@@ -31,7 +31,7 @@
     [self.navigationController setNavigationBarHidden:YES animated:YES];
     
     self.birthdayField.delegate = self;
-    self.yearsAliveField.delegate = self;
+    self.lifespanField.delegate = self;
     self.countryField.delegate = self;
     
     self.countryPicker = [[CountryPicker alloc] init];
@@ -65,8 +65,8 @@
     NSArray *barItems = @[space, space, doneButton];
     doneBar.items = barItems;
     
-    if ([self.yearsAliveField isFirstResponder]) {
-        NSLog(@"yearsAliveField");
+    if ([self.lifespanField isFirstResponder]) {
+        NSLog(@"lifespanField");
         textField.inputAccessoryView = doneBar;
         [textField setKeyboardType:UIKeyboardTypeNumberPad];
         
@@ -124,9 +124,10 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if ([self.yearsAliveField isFirstResponder]) {
-        NSLog(@"Done");
-        [self.yearsAliveField endEditing:YES];
+    if ([self.lifespanField isFirstResponder]) {
+        
+        self.lifespan = [self.lifespanField.text intValue];
+        [self.lifespanField endEditing:YES];
     }
     
     if ([self.birthdayField isFirstResponder]) {
@@ -150,7 +151,7 @@
 - (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
     if ([identifier  isEqualToString:@"GetResults"]) {
-        if (![self.birthdayField hasText] || ![self.countryField hasText] || ![self.yearsAliveField hasText]) {
+        if (![self.birthdayField hasText] || ![self.countryField hasText] || ![self.lifespanField hasText]) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Missing info" message:@"Fill out every field to get your results" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
             
             [alertView show];
@@ -166,6 +167,7 @@
     ResultsViewController *rvc = segue.destinationViewController;
     rvc.birthday = self.birthday;
     rvc.country = self.countryField.text;
+    rvc.lifespan = self.lifespan;
         
     if (self.sexSlider.selectedSegmentIndex == 0) {
         rvc.sex = @"female";

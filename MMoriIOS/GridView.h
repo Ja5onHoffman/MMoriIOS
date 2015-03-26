@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GridView : UIView
+@interface GridView : UIScrollView
+
+@property (nonatomic) int age;
+@property (nonatomic) int weeks;
+@property (nonatomic) int lifespan;
 
 @end

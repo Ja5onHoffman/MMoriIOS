@@ -29,15 +29,37 @@ UIImage *GridRect(UIColor *color, CGFloat side)
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
     
-    for (int j = 0; j < 312; j+=6) {
-        for (int i = 0; i < 312; i+=6) {
+    float age = roundf(self.age);
+    NSLog(@"age %f", age);
+    
+    int j;
+    int i;
+    for (j = 0; j < self.age * 6; j+=6) {
+        for (i = 0; i < 312; i+=6) {
             CGContextFillRect(context, CGRectMake(i, j, 5, 5));
         }
     }
     
+    int w = 0;
+    for (int x = 0; x < 312; x+=6) {
+        if (w < self.weeks) {
+            CGContextFillRect(context, CGRectMake(x, j, 5, 5));
+            w++;
+        } else {
+            CGContextSetFillColorWithColor(context, [UIColor blueColor].CGColor);
+            CGContextFillRect(context, CGRectMake(x, j, 5, 5));
+        }
+    }
     
+    int rem = self.lifespan - (self.age + 1);
+    NSLog(@"rem %d", rem);
     
-    
+    // j is already greater than rem * 6
+    for (j+=6; j < rem * 6; j+=6) {
+        for (i = 0; i < 312; i+=6) {
+            CGContextFillRect(context, CGRectMake(i, j, 5, 5));
+        }
+    }
 }
 
 @end

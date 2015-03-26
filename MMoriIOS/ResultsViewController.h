@@ -14,5 +14,6 @@
 @property (strong, nonatomic) NSString *country;
 @property (nonatomic) NSInteger yearsAlive;
 @property (strong, nonatomic) NSString *sex;
+@property (nonatomic) int lifespan;
 
 @end
