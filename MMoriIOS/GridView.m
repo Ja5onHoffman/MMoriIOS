@@ -51,11 +51,10 @@ UIImage *GridRect(UIColor *color, CGFloat side)
         }
     }
     
-    int rem = self.lifespan - (self.age + 1);
+    int rem = self.lifespan + (self.age + 1);
     NSLog(@"rem %d", rem);
     
-    // j is already greater than rem * 6
-    for (j+=6; j < rem * 6; j+=6) {
+    for (j+=6; j < self.lifespan * 6; j+=6) {
         for (i = 0; i < 312; i+=6) {
             CGContextFillRect(context, CGRectMake(i, j, 5, 5));
         }
