@@ -119,13 +119,17 @@
                         <viewControllerLayoutGuide type="top" id="zcO-KX-0e1"/>
                         <viewControllerLayoutGuide type="bottom" id="h9m-9b-pas"/>
                     </layoutGuides>
-                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="uDN-6b-Pc0" customClass="GridView">
+                    <scrollView key="view" autoresizesSubviews="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" id="uDN-6b-Pc0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="delegate" destination="1QY-Ve-IId" id="WU3-mO-96d"/>
+                        </connections>
                     </scrollView>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="gridView" destination="uDN-6b-Pc0" id="eKX-RN-lSh"/>
+                        <outlet property="view" destination="uDN-6b-Pc0" id="Ysg-5t-Ow2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fGG-Pb-Nm1" userLabel="First Responder" sceneMemberID="firstResponder"/>
