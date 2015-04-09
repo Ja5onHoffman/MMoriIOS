@@ -164,15 +164,18 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    ResultsViewController *rvc = segue.destinationViewController;
-    rvc.birthday = self.birthday;
-    rvc.country = self.countryField.text;
-    rvc.lifespan = self.lifespan;
+    if ([segue.identifier isEqualToString:@"GetResults"]) {
+    
+        ResultsViewController *rvc = segue.destinationViewController;
+        rvc.birthday = self.birthday;
+        rvc.country = self.countryField.text;
+        rvc.lifespan = self.lifespan;
         
-    if (self.sexSlider.selectedSegmentIndex == 0) {
-        rvc.sex = @"female";
-    } else {
-        rvc.sex = @"male";
+        if (self.sexSlider.selectedSegmentIndex == 0) {
+            rvc.sex = @"female";
+        } else {
+            rvc.sex = @"male";
+        }
     }
 }
 

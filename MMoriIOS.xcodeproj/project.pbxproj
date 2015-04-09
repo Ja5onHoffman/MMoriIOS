@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3126E7CB1AC844F400FD57F2 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3126E7CA1AC844F400FD57F2 /* AboutViewController.m */; };
 		31558CA51AB3A67C00CA182A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 31558CA41AB3A67C00CA182A /* main.m */; };
 		31558CA81AB3A67C00CA182A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 31558CA71AB3A67C00CA182A /* AppDelegate.m */; };
 		31558CAE1AB3A67C00CA182A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 31558CAC1AB3A67C00CA182A /* Main.storyboard */; };
@@ -32,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3126E7C91AC844F400FD57F2 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		3126E7CA1AC844F400FD57F2 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		31558C9F1AB3A67C00CA182A /* MMoriIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMoriIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		31558CA31AB3A67C00CA182A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		31558CA41AB3A67C00CA182A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 				31558CCC1AB46B8500CA182A /* ResultsViewController.m */,
 				31E9476B1AC1D3740012D8BA /* GridVisualViewController.h */,
 				31E9476C1AC1D3740012D8BA /* GridVisualViewController.m */,
+				3126E7C91AC844F400FD57F2 /* AboutViewController.h */,
+				3126E7CA1AC844F400FD57F2 /* AboutViewController.m */,
 				31558CD31AB8C38D00CA182A /* GridView.h */,
 				31558CD41AB8C38D00CA182A /* GridView.m */,
 				31558CAC1AB3A67C00CA182A /* Main.storyboard */,
@@ -245,6 +250,7 @@
 			files = (
 				31558CD01AB4720700CA182A /* CountryPicker.m in Sources */,
 				31E9476D1AC1D3740012D8BA /* GridVisualViewController.m in Sources */,
+				3126E7CB1AC844F400FD57F2 /* AboutViewController.m in Sources */,
 				31558CA81AB3A67C00CA182A /* AppDelegate.m in Sources */,
 				31558CCA1AB3A85300CA182A /* OpeningViewController.m in Sources */,
 				31558CA51AB3A67C00CA182A /* main.m in Sources */,

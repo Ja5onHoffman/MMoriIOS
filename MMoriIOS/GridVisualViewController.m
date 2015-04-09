@@ -12,6 +12,8 @@
 @interface GridVisualViewController () <UIScrollViewDelegate>
 
 @property (strong, nonatomic) GridView *gridView;
+@property (weak, nonatomic) IBOutlet UILabel *gridLabel;
+
 @end
 
 @implementation GridVisualViewController
@@ -25,9 +27,12 @@
     self.gridView.weeks = self.weeks;
     self.gridView.lifespan = self.lifespan;
     self.gridView.backgroundColor = [UIColor whiteColor];
-    [self.gridView setFrame:CGRectMake(30, 100, 260, self.gridView.lifespan*5)];
     [self.view addSubview:self.gridView];
     
+    float yPos = (self.view.frame.size.height / 3) + 40;
+    float xPos = (self.view.frame.size.width / 2) - 130;
+    [self.gridView setFrame:CGRectMake(xPos, yPos, 260, self.gridView.lifespan*5)];
+
     [self.gridView setNeedsDisplay];
 }
 
@@ -36,6 +41,7 @@
     [super viewDidAppear:animated];
     
     [(UIScrollView *)self.view setContentSize:CGSizeMake(self.view.bounds.size.width, self.gridView.size.height * 1.5)];
+    [(UIScrollView *)self.view setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
